@@ -98,6 +98,7 @@
         },
       }
     </script>
+  
 <style>
         @keyframes scanline {
             0% { transform: translateY(-100%); }
@@ -990,6 +991,192 @@
   }
 
 }
+/* ========================= */
+/* HERO SECTION */
+/* ========================= */
+
+#hero {
+    position: relative;
+
+    min-height: 80vh;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    padding-top: 0;
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-bottom: 80px;
+}
+
+/* HUGE TEXT */
+
+.hero-text-container {
+    position: relative;
+
+    z-index: 1;
+}
+
+.hero-name {
+
+    font-size: clamp(7rem, 22vw, 18rem);
+
+    line-height: 0.8;
+
+    font-weight: 900;
+
+    color: #ff1e2d;
+
+    letter-spacing: -12px;
+
+    text-transform: uppercase;
+}
+
+/* OUTLINE ROLE */
+
+.hero-role {
+
+    font-size: clamp(2rem, 5vw, 5rem);
+
+    font-weight: 900;
+
+    color: transparent;
+
+    -webkit-text-stroke: 1px #ffb3b2;
+
+    letter-spacing: 4px;
+
+    margin-top: 10px;
+}
+
+/* DESCRIPTION */
+
+.hero-info {
+
+    margin-top: 35px;
+
+    max-width: 550px;
+
+    color: rgba(255,255,255,0.7);
+
+    line-height: 1.8;
+
+    font-size: 1rem;
+}
+
+/* ========================= */
+/* LOTTIE ANIMATION */
+/* ========================= */
+
+#lottie-container {
+
+    position: absolute;
+    right: 0;
+    bottom: -40px;
+
+    width: 600px;
+    height: 600px;
+
+    opacity: 0.95;
+
+    z-index: 3;
+
+    cursor: pointer;
+
+    transition: 0.4s ease;
+}
+.hero-name {
+    mix-blend-mode: lighten;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-role {
+    position: relative;
+    z-index: 2;
+}
+
+#lottie-container:hover {
+
+    transform: scale(1.03);
+}
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+
+    #hero {
+        padding: 40px 24px;
+    }
+
+    #lottie-container {
+
+        width: 320px;
+
+        height: 320px;
+
+        right: -30px;
+
+        bottom: 20px;
+
+        opacity: 0.9;
+    }
+
+    .hero-name {
+
+        font-size: clamp(4rem, 20vw, 8rem);
+    }
+
+    .hero-role {
+
+        font-size: 1.5rem;
+    }
+}
+.tap-indicator {
+
+    position: absolute;
+
+    right: 170px;
+
+    bottom: 10px;
+
+    color: rgba(255, 179, 178, 0.7);
+
+    font-size: 0.72rem;
+
+    letter-spacing: 3px;
+
+    font-family: 'JetBrains Mono', monospace;
+
+    text-transform: uppercase;
+
+    z-index: 5;
+
+    animation: tapPulse 2s infinite;
+}
+
+/* PULSE EFFECT */
+
+@keyframes tapPulse {
+
+    0% {
+        opacity: 0.4;
+        transform: translateY(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(-3px);
+    }
+
+    100% {
+        opacity: 0.4;
+        transform: translateY(0);
+    }
+}
     </style>
 </head>
 <body class="font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container">
@@ -1010,97 +1197,38 @@
 </header>
 <main class="pt-24 px-margin max-w-container-max mx-auto space-y-32 pb-margin">
 <!-- Hero Section: NEURAL_HUB -->
-<section class="relative" id="hero">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter items-center">
-<div class="space-y-6">
-<div class="inline-block px-3 py-1 border border-primary text-primary font-label-md text-label-sm uppercase tracking-widest">
-                    System.Status: Active
-                </div>
-<h1 class="text-headline-xl-mobile md:text-headline-xl font-headline-xl text-primary leading-tight">
-                    LOKESH KUMAR <br/>
-<div class="terminal-role-box">
+<!-- Hero Section -->
+<section id="hero">
 
-    <!-- TOP BAR -->
+    <!-- HUGE BACKGROUND TEXT -->
 
-    <div class="terminal-topbar">
+    <div class="hero-text-container">
 
-        <span class="dot red"></span>
-        <span class="dot yellow"></span>
-        <span class="dot green"></span>
+        <h1 class="hero-name">
+            LOKESH
+        </h1>
 
-        <span class="terminal-title">
-            SYSTEM_ROLE
-        </span>
+        <h2 class="hero-role">
+            ANDROID DEVELOPER
+        </h2>
+
+        <p class="hero-info">
+            Crafting futuristic Android experiences with Kotlin,
+            Jetpack Compose, Firebase, and cyberpunk-inspired UI systems.
+        </p>
 
     </div>
 
-    <!-- TERMINAL BODY -->
+    <!-- FLOATING LOTTIE -->
 
-    <div class="terminal-body">
+    <div id="lottie-container"></div>
+    <div class="tap-indicator">
 
-        <span class="terminal-symbol">
-            >
-        </span>
-
-        <span id="typing-text" class="terminal-typing"></span>
-
-    </div>
+    TAP TO SWITCH AVATAR
 
 </div>
-</h1>
-<p class="text-body-lg font-body-lg text-on-surface-variant max-w-xl">
-                    Synthesizing high-performance mobile architectures. Specialized in crafting robust, neural-inspired Android solutions with a focus on security and efficiency.
-                </p>
-<div class="flex flex-wrap gap-4 pt-4">
-<button class="bg-primary text-on-primary font-bold px-8 py-3 cyber-corner flex items-center gap-2 glitch-hover group transition-all">
-<span class="material-symbols-outlined">download</span>
-                        Resume
-                    </button>
-</div>
-</div>
-<!-- Framed Empty Container (Neural Hub Visual) -->
-<div class="relative h-[400px] md:h-[500px] border-2 border-outline-variant bg-surface-container-lowest/50 cyber-corner p-4 scanline-overlay cursor-pointer group transition-all hover:border-primary/50" id="character-container">
-<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-<!-- Drawing State -->
-<div class="character-fade flex flex-col items-center" id="state-drawing">
-<span class="material-symbols-outlined text-[140px] text-primary drop-shadow-[0_0_15px_rgba(255,179,178,0.5)]">brush</span>
-<span class="mt-4 font-label-md text-primary animate-pulse">MODE: ART_GEN</span>
-</div>
-<!-- Coding State -->
-<div class="character-fade character-hidden flex flex-col items-center" id="state-coding">
-<span class="material-symbols-outlined text-[140px] text-primary drop-shadow-[0_0_15px_rgba(255,179,178,0.5)]">terminal</span>
-<span class="mt-4 font-label-md text-primary animate-pulse">MODE: CODE_DEP</span>
-</div>
-<!-- Football State -->
-<div class="character-fade character-hidden flex flex-col items-center" id="state-football">
-<span class="material-symbols-outlined text-[140px] text-primary drop-shadow-[0_0_15px_rgba(255,179,178,0.5)]">sports_soccer</span>
-<span class="mt-4 font-label-md text-primary animate-pulse">MODE: PHYS_EXEC</span>
-</div>
-</div>
-<div class="absolute top-4 left-4 text-label-sm font-label-sm text-primary/60">HUB_ID: 0x4F92</div>
-<div class="absolute top-4 right-4 text-label-sm font-label-sm text-primary/60">TAP_TO_TOGGLE</div>
-<div class="absolute bottom-4 right-4 text-label-sm font-label-sm text-primary/60" id="scan-status">SCANNING_PROTOCOL: 100%</div>
-<!-- Decorative scanning line -->
-<div class="absolute top-0 left-0 w-full h-[2px] bg-primary/40 animate-[scanline_4s_linear_infinite] shadow-[0_0_10px_#ffb3b2]"></div>
-<div class="w-full h-full border border-primary/20 flex flex-col justify-between p-6 pointer-events-none">
-<div class="flex justify-between items-start">
-<div class="w-12 h-1 bg-primary"></div>
-<div class="w-1 h-12 bg-primary"></div>
-</div>
-<div class="space-y-2 opacity-30">
-<div class="h-1 w-full bg-outline-variant"></div>
-<div class="h-1 w-2/3 bg-outline-variant"></div>
-<div class="h-1 w-1/2 bg-outline-variant"></div>
-</div>
-<div class="flex justify-between items-end">
-<div class="w-1 h-12 bg-primary"></div>
-<div class="w-12 h-1 bg-primary"></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Projects Section: PROJECT_MATRIX -->
+
+</section><!-- Projects Section: PROJECT_MATRIX -->
 <section class="space-y-gutter" id="projects">
 <div class="flex items-center gap-4">
 <h2 class="text-headline-lg font-headline-lg text-primary uppercase">PROJECT_MATRIX</h2>
@@ -1895,62 +2023,6 @@
 </div>
 </footer>
 <script>
-    // Typing Effect Configuration
-    const textElement = document.getElementById('typing-text');
-    const text = "ANDROID DEVELOPER";
-    let charIndex = 0;
-    let isTyping = true;
-
-    function typeEffect() {
-        if (isTyping) {
-            if (charIndex < text.length) {
-                textElement.innerText = text.substring(0, charIndex + 1);
-                charIndex++;
-                setTimeout(typeEffect, 100);
-            } else {
-                isTyping = false;
-                setTimeout(typeEffect, 3000); // Pause at end
-            }
-        } else {
-            if (charIndex > 0) {
-                textElement.innerText = text.substring(0, charIndex - 1);
-                charIndex--;
-                setTimeout(typeEffect, 50);
-            } else {
-                isTyping = true;
-                setTimeout(typeEffect, 500); // Pause at start
-            }
-        }
-    }
-    
-    // Start Typing
-    window.addEventListener('DOMContentLoaded', () => {
-        setTimeout(typeEffect, 1000);
-    });
-
-    // Character State Management
-    const states = ['state-drawing', 'state-coding', 'state-football'];
-    let currentStateIndex = 0;
-    const container = document.getElementById('character-container');
-
-    container.addEventListener('click', () => {
-        // Hide current
-        document.getElementById(states[currentStateIndex]).classList.add('character-hidden');
-        
-        // Increment
-        currentStateIndex = (currentStateIndex + 1) % states.length;
-        
-        // Show new
-        document.getElementById(states[currentStateIndex]).classList.remove('character-hidden');
-        
-        // Visual feedback on status bar
-        const scanStatus = document.getElementById('scan-status');
-        scanStatus.innerText = `SYNCING_MODULE: ${currentStateIndex + 1}/3`;
-        setTimeout(() => {
-            scanStatus.innerText = 'SCANNING_PROTOCOL: 100%';
-        }, 800);
-    });
-
     // Micro-interactions and Glitch effects
     document.querySelectorAll('.glitch-hover').forEach(button => {
         button.addEventListener('mouseover', () => {
@@ -1970,5 +2042,69 @@
             });
         });
     });
+    
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+    <script>
+
+const animations = [
+
+    "animation1.json",
+    "animation2.json",
+    "animation3.json"
+
+];
+
+let currentAnimation = 0;
+
+/* UNIQUE VARIABLE NAME */
+
+const lottieContainer =
+    document.getElementById("lottie-container");
+
+/* LOAD FIRST */
+
+let anim = lottie.loadAnimation({
+
+    container: lottieContainer,
+
+    renderer: "svg",
+
+    loop: true,
+
+    autoplay: true,
+
+    path: animations[currentAnimation]
+
+});
+
+/* CHANGE ON CLICK */
+
+lottieContainer.addEventListener("click", () => {
+
+    currentAnimation++;
+
+    if (currentAnimation >= animations.length) {
+        currentAnimation = 0;
+    }
+
+    anim.destroy();
+
+    anim = lottie.loadAnimation({
+
+        container: lottieContainer,
+
+        renderer: "svg",
+
+        loop: true,
+
+        autoplay: true,
+
+        path: animations[currentAnimation]
+
+    });
+
+});
+
 </script>
 </body></html>
