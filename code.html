@@ -1,0 +1,1974 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LOKESH KUMAR // ANDROID ARCHITECT</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&amp;family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#680012",
+                    "surface": "#210e0e",
+                    "tertiary": "#c8c6c5",
+                    "primary-fixed": "#ffdad8",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary": "#313030",
+                    "on-primary-fixed": "#410008",
+                    "tertiary-fixed-dim": "#c8c6c5",
+                    "surface-dim": "#210e0e",
+                    "tertiary-fixed": "#e5e2e1",
+                    "on-tertiary-fixed": "#1c1b1b",
+                    "on-background": "#ffdad8",
+                    "error-container": "#93000a",
+                    "primary-container": "#ff525c",
+                    "on-surface-variant": "#e9bcba",
+                    "on-secondary-container": "#b7b4b4",
+                    "surface-container-highest": "#462f2e",
+                    "on-tertiary-fixed-variant": "#474746",
+                    "surface-tint": "#ffb3b2",
+                    "surface-container-lowest": "#1b0909",
+                    "secondary-container": "#474646",
+                    "surface-variant": "#462f2e",
+                    "surface-container": "#2e1a1a",
+                    "surface-container-low": "#2a1616",
+                    "outline": "#af8786",
+                    "surface-container-high": "#3a2424",
+                    "error": "#ffb4ab",
+                    "on-secondary-fixed-variant": "#474646",
+                    "on-tertiary-container": "#2a2a2a",
+                    "surface-bright": "#4b3333",
+                    "secondary-fixed": "#e5e2e1",
+                    "background": "#210e0e",
+                    "tertiary-container": "#929090",
+                    "on-primary-container": "#5b000f",
+                    "inverse-primary": "#bf002a",
+                    "outline-variant": "#5f3e3e",
+                    "on-tertiary": "#313030",
+                    "on-primary-fixed-variant": "#92001e",
+                    "on-surface": "#ffdad8",
+                    "secondary": "#c9c6c5",
+                    "inverse-surface": "#ffdad8",
+                    "primary-fixed-dim": "#ffb3b2",
+                    "inverse-on-surface": "#412b2a",
+                    "on-error": "#690005",
+                    "primary": "#ffb3b2",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "secondary-fixed-dim": "#c9c6c5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "unit": "8px",
+                    "margin": "32px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Sora"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["JetBrains Mono"],
+                    "headline-lg": ["Sora"],
+                    "label-md": ["JetBrains Mono"],
+                    "headline-xl-mobile": ["Sora"],
+                    "headline-xl": ["Sora"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                    "headline-xl-mobile": ["36px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                    "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        @keyframes terminal-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        @keyframes neon-blink {
+            0%, 100% { opacity: 1; color: #ffb3b2; }
+            50% { opacity: 0.7; color: #ff525c; }
+        }
+
+        .scanline-overlay {
+            position: relative;
+            overflow: hidden;
+        }
+        .scanline-overlay::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .glitch-hover:hover {
+            animation: glitch 0.2s cubic-bezier(.25,.46,.45,.94) both infinite;
+            color: #ffb3b2;
+            text-shadow: 2px 0 #FF003C, -2px 0 #ffb3b2;
+        }
+
+        .project-card-glow:hover {
+            box-shadow: 0 0 25px rgba(255, 82, 92, 0.4), inset 0 0 10px rgba(255, 179, 178, 0.2);
+            animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) both 1;
+        }
+
+        .project-card-glow:hover .neon-tag {
+            animation: neon-blink 1.5s ease-in-out infinite;
+        }
+
+        .cyber-corner {
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
+        
+        .cyber-corner-reverse {
+            clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+        }
+
+        .glow-red { box-shadow: 0 0 15px rgba(255, 82, 92, 0.4); }
+
+        .terminal-cursor::after {
+            content: "█";
+            animation: terminal-blink 1s infinite;
+            margin-left: 4px;
+        }
+
+        body {
+            background-color: #050505;
+            background-image: 
+                linear-gradient(rgba(255, 0, 60, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 0, 60, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            color: #ffdad8;
+        }
+
+        .character-fade {
+            transition: opacity 0.3s ease-in-out, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .character-hidden {
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+            pointer-events: none;
+            position: absolute;
+        }
+        /* CYBER FLIP PROJECT CARD */
+
+.cyber-flip-card {
+    background: transparent;
+    width: 100%;
+    height: 420px;
+    perspective: 1200px;
+}
+
+.cyber-flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+}
+
+.cyber-flip-card:hover .cyber-flip-inner {
+    transform: rotateY(180deg);
+}
+
+.cyber-front,
+.cyber-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border: 1px solid rgba(255, 82, 92, 0.25);
+}
+
+/* FRONT */
+
+.cyber-front {
+    background: #0a0a0a;
+}
+
+.cyber-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    opacity: 0.9;
+
+    transition: 0.5s;
+}
+
+.cyber-flip-card:hover .cyber-front img {
+    transform: scale(1.08);
+
+    opacity: 0.7;
+}
+
+.cyber-front-overlay {
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.65),
+        rgba(0,0,0,0.1)
+    );
+}
+
+.cyber-front-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 24px;
+    width: 100%;
+}
+
+.cyber-project-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffb3b2;
+    text-shadow: 0 0 15px rgba(255, 82, 92, 0.7);
+}
+
+.cyber-project-sub {
+    color: #ff8b92;
+    margin-top: 6px;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+}
+
+/* BACK */
+
+.cyber-back {
+    background: #111;
+    transform: rotateY(180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Animated Neon Border */
+
+.cyber-back::before {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180%;
+    background: linear-gradient(
+        180deg,
+        transparent,
+        #ff003c,
+        #ff4d6d,
+        #ff003c,
+        transparent
+    );
+    animation: cyberRotate 5s linear infinite;
+}
+
+.cyber-back-content {
+    position: absolute;
+    inset: 4px;
+    background: #0a0a0a;
+    border-radius: 14px;
+    padding: 24px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cyber-back-content h3 {
+    color: #ffb3b2;
+    font-size: 1.4rem;
+    margin-bottom: 14px;
+}
+
+.cyber-back-content p {
+    color: #d1b5b5;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.cyber-skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.cyber-skill-tags span {
+    padding: 6px 12px;
+    border: 1px solid rgba(255, 82, 92, 0.4);
+    background: rgba(255, 0, 60, 0.08);
+    color: #ffb3b2;
+    font-size: 0.8rem;
+    border-radius: 999px;
+    transition: 0.3s;
+}
+
+.cyber-skill-tags span:hover {
+    background: rgba(255, 0, 60, 0.25);
+    box-shadow: 0 0 10px rgba(255, 82, 92, 0.4);
+}
+
+@keyframes cyberRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+/* ========================= */
+/* CYBER SKILL CARDS */
+/* ========================= */
+
+.skill-wrapper {
+  width: 100%;
+  max-width: 280px;
+}
+
+.skill-card {
+  width: 100%;
+  height: 130px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  border: 1px solid #1d1d1d;
+
+  background-color: #0a0a0a;
+
+  transition: all 0.35s ease;
+}
+
+/* ICON */
+
+.skill-icon {
+  font-size: 38px;
+  color: #ffb3b2;
+
+  transition: 0.3s ease;
+}
+
+/* TEXT */
+
+.skill-text {
+  font-size: 14px;
+  letter-spacing: 3px;
+  font-weight: 700;
+}
+
+/* HOVER */
+
+.skill-card:hover {
+  transform: translateY(-8px) scale(1.02);
+
+  box-shadow:
+    0 0 15px rgba(255, 70, 85, 0.35),
+    0 0 40px rgba(255, 70, 85, 0.15);
+
+  border-color: #FF4655;
+}
+
+.skill-card:hover .skill-icon {
+  transform: scale(1.15);
+
+  color: white;
+
+  text-shadow:
+    0 0 10px rgba(255, 70, 85, 0.7),
+    0 0 20px rgba(255, 70, 85, 0.5);
+}
+
+/* ========================= */
+/* UIVERSE BUTTON EFFECT */
+/* ========================= */
+
+.primary-button {
+  font-family: 'Sora', sans-serif;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.08rem;
+
+  padding: 0.8rem 2.1rem;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 531.28 200'%3E%3Cdefs%3E%3Cstyle%3E .shape %7B fill: %23FF4655 %7D %3C/style%3E%3C/defs%3E%3Cg id='Layer_2'%3E%3Cg id='Layer_1-2'%3E%3Cpolygon class='shape' points='415.81 200 0 200 115.47 0 531.28 0 415.81 200' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+
+  background-color: #0E1822;
+
+  background-size: 200%;
+  background-position: 200%;
+  background-repeat: no-repeat;
+
+  transition: 0.3s ease-in-out;
+  transition-property:
+    background-position,
+    border,
+    color,
+    transform;
+
+  position: relative;
+  z-index: 1;
+}
+
+.primary-button:hover {
+  border: 1px solid #FF4655;
+  color: white;
+  background-position: 40%;
+}
+
+.primary-button:before {
+  content: "";
+
+  position: absolute;
+
+  background-color: #0E1822;
+
+  width: 0.25rem;
+  height: 0.25rem;
+
+  top: -1px;
+  left: -1px;
+
+  transition: background-color 0.15s ease-in-out;
+}
+
+.primary-button:hover:before {
+  background-color: white;
+}
+
+.primary-button:after {
+  content: "";
+
+  position: absolute;
+
+  background-color: #FF4655;
+
+  width: 0.3rem;
+  height: 0.3rem;
+
+  bottom: -1px;
+  right: -1px;
+
+  transition: background-color 0.15s ease-in-out;
+}
+
+.primary-button:hover:after {
+  background-color: white;
+}
+
+/* OUTER BORDERS */
+
+.button-borders {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+}
+
+.button-borders:before {
+  content: "";
+
+  position: absolute;
+
+  width: calc(100% + 0.5em);
+  height: 50%;
+
+  left: -0.3em;
+  top: -0.3em;
+
+  border: 1px solid #222;
+  border-bottom: 0px;
+
+  transition: 0.3s;
+}
+
+.button-borders:after {
+  content: "";
+
+  position: absolute;
+
+  width: calc(100% + 0.5em);
+  height: 50%;
+
+  left: -0.3em;
+  bottom: -0.3em;
+
+  border: 1px solid #222;
+  border-top: 0px;
+
+  z-index: 0;
+
+  transition: 0.3s;
+}
+
+.button-borders:hover:before,
+.button-borders:hover:after {
+  border-color: #FF4655;
+}
+/* ========================= */
+/* CYBER ACTION BUTTONS */
+/* ========================= */
+
+.project-action-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 18px;
+
+  margin-top: 55px;
+}
+
+/* BUTTON */
+
+.cyber-action-btn {
+  position: relative;
+
+  width: 54px;
+  height: 54px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 14px;
+
+  background: linear-gradient(
+    135deg,
+    #111,
+    #1a1a1a
+  );
+
+  border: 1px solid rgba(255, 82, 92, 0.35);
+
+  color: #ffb3b2;
+
+  cursor: pointer;
+
+  overflow: visible;
+
+  transition: all 0.4s ease;
+
+  box-shadow:
+    0 0 10px rgba(255, 70, 85, 0.15);
+}
+
+/* ICON */
+
+.cyber-action-btn svg {
+  width: 24px;
+  height: 24px;
+
+  fill: currentColor;
+
+  transition: all 0.4s ease;
+}
+
+/* TOOLTIP */
+
+.cyber-action-btn span {
+  position: absolute;
+
+  left: 50%;
+  top: -32px;
+
+  transform: translateX(-50%) translateY(10px);
+
+  opacity: 0;
+
+  white-space: nowrap;
+
+  color: #ffb3b2;
+
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  pointer-events: none;
+
+  transition: all 0.4s ease;
+}
+
+/* HOVER */
+
+.cyber-action-btn:hover {
+  transform: translateY(-5px);
+
+  background: linear-gradient(
+    135deg,
+    #ff003c,
+    #3b000f
+  );
+
+  box-shadow:
+    0 0 18px rgba(255, 70, 85, 0.45),
+    0 0 40px rgba(255, 70, 85, 0.2);
+}
+
+.cyber-action-btn:hover svg {
+  transform: scale(1.1);
+
+  color: white;
+}
+
+.cyber-action-btn:hover span {
+  opacity: 1;
+
+  transform: translateX(-50%) translateY(0);
+}
+/* ========================= */
+/* CONTACT MAP BACKGROUND */
+/* ========================= */
+
+.contact-section {
+  position: relative;
+
+  overflow: hidden;
+
+  isolation: isolate;
+}
+
+/* MAP IMAGE */
+
+.contact-section::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(5,5,5,0.15) 0%,
+      rgba(5,5,5,0.45) 35%,
+      rgba(5,5,5,0.82) 65%,
+      rgba(5,5,5,1) 100%
+    ),
+    url("chennai-map.png");
+
+  background-size: cover;
+
+  background-position: left center;
+
+  background-repeat: no-repeat;
+
+  opacity: 0.38;
+
+  z-index: -2;
+
+  filter:
+    contrast(1.2)
+    brightness(0.75)
+    saturate(1.1);
+}
+
+/* EXTRA DARK OVERLAY */
+
+.contact-section::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.15),
+      rgba(0,0,0,0.55)
+    );
+
+  z-index: -1;
+}
+/* ========================= */
+/* CONTACT SECTION LAYOUT */
+/* ========================= */
+
+.contact-layout {
+  display: grid;
+
+  grid-template-columns: 1fr 360px;
+
+  gap: 60px;
+
+  align-items: center;
+
+  min-height: 720px;
+
+  position: relative;
+
+  z-index: 2;
+}
+/* ========================= */
+/* CONTACT LEFT CONTENT */
+/* ========================= */
+
+.contact-left-content {
+  position: relative;
+
+  z-index: 3;
+
+  max-width: 700px;
+}
+
+.contact-main-title {
+  font-size: clamp(4rem, 9vw, 8rem);
+
+  font-weight: 900;
+
+  line-height: 0.95;
+
+  letter-spacing: -3px;
+
+  color: #ffb3b2;
+
+  text-transform: uppercase;
+
+  text-shadow:
+    0 0 20px rgba(255, 70, 85, 0.25);
+}
+
+.contact-subtext {
+  margin-top: 32px;
+
+  font-size: 1rem;
+
+  line-height: 1.9;
+
+  color: rgba(255, 218, 216, 0.78);
+
+  max-width: 560px;
+}
+
+.contact-mini-status {
+  margin-top: 28px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 12px 18px;
+
+  border: 1px solid rgba(255, 82, 92, 0.25);
+
+  background: rgba(15,15,15,0.55);
+
+  backdrop-filter: blur(10px);
+
+  border-radius: 999px;
+
+  color: #ffb3b2;
+
+  font-size: 0.82rem;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+}
+
+/* STATUS DOT */
+
+.contact-mini-status::before {
+  content: "";
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  background: #FF003C;
+
+  box-shadow:
+    0 0 10px #FF003C,
+    0 0 20px #FF003C;
+}
+/* ========================= */
+/* CONTACT INFO SIDE */
+/* ========================= */
+
+.contact-info-side {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+
+  justify-content: center;
+
+  width: 100%;
+
+  max-width: 360px;
+}
+
+/* ========================= */
+/* CYBER CONTACT PILLS */
+/* ========================= */
+
+.contact-card {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  width: 100%;
+
+  padding: 14px 18px;
+
+  border-radius: 24px;
+
+  border: none;
+
+  text-decoration: none;
+
+  background: rgba(0, 0, 0, 0.35);
+
+  backdrop-filter: blur(14px);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    inset 0 0 0 1px rgba(255,255,255,0.04);
+
+  transition:
+    transform 0.45s cubic-bezier(0.165, 0.84, 0.44, 1),
+    box-shadow 0.45s ease,
+    background 0.45s ease;
+
+  color: #ffdad8;
+
+  min-height: 82px;
+}
+
+/* HOVER */
+
+.contact-card:hover {
+  transform: translateY(-4px);
+
+  background: rgba(20, 0, 5, 0.55);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    inset 0 0 0 1px rgba(255,70,85,0.15),
+    0 0 24px rgba(255,70,85,0.12);
+}
+
+/* ICON */
+
+.contact-card .material-symbols-outlined {
+  font-size: 2rem;
+
+  color: #ffb3b2;
+
+  flex-shrink: 0;
+
+  transition: 0.4s ease;
+}
+
+.contact-card:hover .material-symbols-outlined {
+  color: #FF4655;
+
+  transform: scale(1.08);
+}
+/* ========================= */
+/* CONTACT REAL ICONS */
+/* ========================= */
+
+.contact-real-icon {
+    font-size: 2.2rem;
+
+    color: #ffb3b2;
+
+    flex-shrink: 0;
+
+    transition: 0.4s ease;
+
+    text-shadow:
+        0 0 12px rgba(255, 70, 85, 0.18);
+}
+
+/* HOVER */
+
+.contact-card:hover .contact-real-icon {
+    color: #FF4655;
+
+    transform: scale(1.08);
+
+    text-shadow:
+        0 0 18px rgba(255, 70, 85, 0.45);
+}
+
+/* LABEL */
+
+.contact-card .text-label-sm {
+  font-size: 0.68rem;
+
+  letter-spacing: 2px;
+
+  color: #ff8f97;
+
+  margin-bottom: 4px;
+}
+
+/* VALUE */
+
+.contact-card .text-headline-md {
+  font-size: 0.92rem;
+
+  line-height: 1.3;
+
+  font-weight: 700;
+
+  color: #ffe1df;
+
+  word-break: break-word;
+}
+/* ========================= */
+/* MOBILE CONTACT SECTION */
+/* ========================= */
+
+@media (max-width: 980px) {
+
+  .contact-layout {
+    grid-template-columns: 1fr;
+
+    gap: 50px;
+  }
+
+  .contact-info-side {
+    max-width: 100%;
+  }
+
+  .contact-main-title {
+    font-size: clamp(3rem, 12vw, 5rem);
+  }
+
+}
+    </style>
+</head>
+<body class="font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin py-unit bg-surface/80 backdrop-blur-md border-b border-outline-variant">
+<div class="text-label-md font-label-md font-bold tracking-tighter text-primary">
+        LOKESH KUMAR // ANDROID ARCHITECT
+    </div>
+<nav class="hidden md:flex gap-gutter items-center">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-all duration-100 glitch-hover" href="#projects">Projects</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-all duration-100 glitch-hover" href="#skills">Skills</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-all duration-100 glitch-hover" href="#experience">Experience</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-all duration-100 glitch-hover" href="#contact">Contact</a>
+<button class="ml-4 px-4 py-1 bg-primary text-on-primary font-bold cyber-corner glitch-hover">
+            Resume
+        </button>
+</nav>
+</header>
+<main class="pt-24 px-margin max-w-container-max mx-auto space-y-32 pb-margin">
+<!-- Hero Section: NEURAL_HUB -->
+<section class="relative" id="hero">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter items-center">
+<div class="space-y-6">
+<div class="inline-block px-3 py-1 border border-primary text-primary font-label-md text-label-sm uppercase tracking-widest">
+                    System.Status: Active
+                </div>
+<h1 class="text-headline-xl-mobile md:text-headline-xl font-headline-xl text-primary leading-tight">
+                    LOKESH KUMAR <br/>
+<div class="terminal-role-box">
+
+    <!-- TOP BAR -->
+
+    <div class="terminal-topbar">
+
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+
+        <span class="terminal-title">
+            SYSTEM_ROLE
+        </span>
+
+    </div>
+
+    <!-- TERMINAL BODY -->
+
+    <div class="terminal-body">
+
+        <span class="terminal-symbol">
+            >
+        </span>
+
+        <span id="typing-text" class="terminal-typing"></span>
+
+    </div>
+
+</div>
+</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-xl">
+                    Synthesizing high-performance mobile architectures. Specialized in crafting robust, neural-inspired Android solutions with a focus on security and efficiency.
+                </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="bg-primary text-on-primary font-bold px-8 py-3 cyber-corner flex items-center gap-2 glitch-hover group transition-all">
+<span class="material-symbols-outlined">download</span>
+                        Resume
+                    </button>
+</div>
+</div>
+<!-- Framed Empty Container (Neural Hub Visual) -->
+<div class="relative h-[400px] md:h-[500px] border-2 border-outline-variant bg-surface-container-lowest/50 cyber-corner p-4 scanline-overlay cursor-pointer group transition-all hover:border-primary/50" id="character-container">
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<!-- Drawing State -->
+<div class="character-fade flex flex-col items-center" id="state-drawing">
+<span class="material-symbols-outlined text-[140px] text-primary drop-shadow-[0_0_15px_rgba(255,179,178,0.5)]">brush</span>
+<span class="mt-4 font-label-md text-primary animate-pulse">MODE: ART_GEN</span>
+</div>
+<!-- Coding State -->
+<div class="character-fade character-hidden flex flex-col items-center" id="state-coding">
+<span class="material-symbols-outlined text-[140px] text-primary drop-shadow-[0_0_15px_rgba(255,179,178,0.5)]">terminal</span>
+<span class="mt-4 font-label-md text-primary animate-pulse">MODE: CODE_DEP</span>
+</div>
+<!-- Football State -->
+<div class="character-fade character-hidden flex flex-col items-center" id="state-football">
+<span class="material-symbols-outlined text-[140px] text-primary drop-shadow-[0_0_15px_rgba(255,179,178,0.5)]">sports_soccer</span>
+<span class="mt-4 font-label-md text-primary animate-pulse">MODE: PHYS_EXEC</span>
+</div>
+</div>
+<div class="absolute top-4 left-4 text-label-sm font-label-sm text-primary/60">HUB_ID: 0x4F92</div>
+<div class="absolute top-4 right-4 text-label-sm font-label-sm text-primary/60">TAP_TO_TOGGLE</div>
+<div class="absolute bottom-4 right-4 text-label-sm font-label-sm text-primary/60" id="scan-status">SCANNING_PROTOCOL: 100%</div>
+<!-- Decorative scanning line -->
+<div class="absolute top-0 left-0 w-full h-[2px] bg-primary/40 animate-[scanline_4s_linear_infinite] shadow-[0_0_10px_#ffb3b2]"></div>
+<div class="w-full h-full border border-primary/20 flex flex-col justify-between p-6 pointer-events-none">
+<div class="flex justify-between items-start">
+<div class="w-12 h-1 bg-primary"></div>
+<div class="w-1 h-12 bg-primary"></div>
+</div>
+<div class="space-y-2 opacity-30">
+<div class="h-1 w-full bg-outline-variant"></div>
+<div class="h-1 w-2/3 bg-outline-variant"></div>
+<div class="h-1 w-1/2 bg-outline-variant"></div>
+</div>
+<div class="flex justify-between items-end">
+<div class="w-1 h-12 bg-primary"></div>
+<div class="w-12 h-1 bg-primary"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Projects Section: PROJECT_MATRIX -->
+<section class="space-y-gutter" id="projects">
+<div class="flex items-center gap-4">
+<h2 class="text-headline-lg font-headline-lg text-primary uppercase">PROJECT_MATRIX</h2>
+<div class="h-[2px] flex-grow bg-outline-variant"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Project Node 1 -->
+<div class="cyber-flip-card">
+    
+    <div class="cyber-flip-inner">
+
+        <!-- FRONT -->
+        <div class="cyber-front">
+
+            <img src="YOUR_IMAGE_URL" alt="Cyber Safety Detection" />
+
+            <div class="cyber-front-overlay"></div>
+
+            <div class="cyber-front-content">
+                <div class="cyber-project-title">
+                    Cyber Safety Detection
+                </div>
+
+                <div class="cyber-project-sub">
+                    SERIAL_001 // 2024
+                </div>
+            </div>
+        </div>
+
+        <!-- BACK -->
+        <div class="cyber-back">
+
+            <div class="cyber-back-content">
+
+                <h3>Cyber Safety Detection</h3>
+
+                <p>
+                    Automated threat intelligence system for Android environments
+                    with real-time anomaly detection, advanced monitoring,
+                    and AI-powered security analysis.
+                </p>
+
+                <div class="cyber-skill-tags">
+                    <span>ANDROID</span>
+                    <span>KOTLIN</span>
+                    <span>ML</span>
+                    <span>FIREBASE</span>
+                </div>
+                <!-- PROJECT ACTION BUTTONS -->
+
+<div class="project-action-buttons">
+
+    <!-- SOURCE CODE -->
+
+    <a href="https://github.com/iamloki143/smart-life-productivity-app"
+       target="_blank"
+       class="cyber-action-btn">
+
+        <svg
+          viewBox="0 0 15 15"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7.49933 0.25C3.49635 0.25 0.25 3.49593 0.25 7.50024C0.25 10.703 2.32715 13.4206 5.2081 14.3797C5.57084 14.446 5.70302 14.2222 5.70302 14.0299C5.70302 13.8576 5.69679 13.4019 5.69323 12.797C3.67661 13.235 3.25112 11.825 3.25112 11.825C2.92132 10.9874 2.44599 10.7644 2.44599 10.7644C1.78773 10.3149 2.49584 10.3238 2.49584 10.3238C3.22353 10.375 3.60629 11.0711 3.60629 11.0711C4.25298 12.1788 5.30335 11.8588 5.71638 11.6732C5.78225 11.205 5.96962 10.8854 6.17658 10.7043C4.56675 10.5209 2.87415 9.89918 2.87415 7.12104C2.87415 6.32925 3.15677 5.68257 3.62053 5.17563C3.54576 4.99226 3.29697 4.25521 3.69174 3.25691C3.69174 3.25691 4.30015 3.06196 5.68522 3.99973C6.26337 3.83906 6.8838 3.75895 7.50022 3.75583C8.1162 3.75895 8.73619 3.83906 9.31523 3.99973C10.6994 3.06196 11.3069 3.25691 11.3069 3.25691C11.7026 4.25521 11.4538 4.99226 11.3795 5.17563C11.8441 5.68257 12.1245 6.32925 12.1245 7.12104C12.1245 9.9063 10.4292 10.5192 8.81452 10.6985C9.07444 10.9224 9.30633 11.3648 9.30633 12.0413C9.30633 13.0102 9.29742 13.7922 9.29742 14.0299C9.29742 14.2239 9.42828 14.4496 9.79591 14.3788C12.6746 13.4179 14.75 10.7025 14.75 7.50024C14.75 3.49593 11.5036 0.25 7.49933 0.25Z"
+          />
+        </svg>
+
+        <span>SOURCE CODE</span>
+
+    </a>
+
+    <!-- APK DOWNLOAD -->
+
+    <a href="#"
+       target="_blank"
+       class="cyber-action-btn">
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 16L7 11H10V4H14V11H17L12 16ZM5 18H19V20H5V18Z"
+          />
+        </svg>
+
+        <span>DOWNLOAD APK</span>
+
+    </a>
+
+</div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Project Node 2 -->
+<div class="cyber-flip-card">
+    
+    <div class="cyber-flip-inner">
+
+        <!-- FRONT -->
+        <div class="cyber-front">
+
+            <img src="YOUR_IMAGE_URL" alt="Cyber Safety Detection" />
+
+            <div class="cyber-front-overlay"></div>
+
+            <div class="cyber-front-content">
+                <div class="cyber-project-title">
+                    Cyber Safety Detection
+                </div>
+
+                <div class="cyber-project-sub">
+                    SERIAL_001 // 2024
+                </div>
+            </div>
+        </div>
+
+        <!-- BACK -->
+        <div class="cyber-back">
+
+            <div class="cyber-back-content">
+
+                <h3>Cyber Safety Detection</h3>
+
+                <p>
+                    Automated threat intelligence system for Android environments
+                    with real-time anomaly detection, advanced monitoring,
+                    and AI-powered security analysis.
+                </p>
+
+                <div class="cyber-skill-tags">
+                    <span>ANDROID</span>
+                    <span>KOTLIN</span>
+                    <span>ML</span>
+                    <span>FIREBASE</span>
+                </div>
+                <!-- PROJECT ACTION BUTTONS -->
+
+<div class="project-action-buttons">
+
+    <!-- SOURCE CODE -->
+
+    <a href="https://github.com/iamloki143/smart-life-productivity-app"
+       target="_blank"
+       class="cyber-action-btn">
+
+        <svg
+          viewBox="0 0 15 15"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7.49933 0.25C3.49635 0.25 0.25 3.49593 0.25 7.50024C0.25 10.703 2.32715 13.4206 5.2081 14.3797C5.57084 14.446 5.70302 14.2222 5.70302 14.0299C5.70302 13.8576 5.69679 13.4019 5.69323 12.797C3.67661 13.235 3.25112 11.825 3.25112 11.825C2.92132 10.9874 2.44599 10.7644 2.44599 10.7644C1.78773 10.3149 2.49584 10.3238 2.49584 10.3238C3.22353 10.375 3.60629 11.0711 3.60629 11.0711C4.25298 12.1788 5.30335 11.8588 5.71638 11.6732C5.78225 11.205 5.96962 10.8854 6.17658 10.7043C4.56675 10.5209 2.87415 9.89918 2.87415 7.12104C2.87415 6.32925 3.15677 5.68257 3.62053 5.17563C3.54576 4.99226 3.29697 4.25521 3.69174 3.25691C3.69174 3.25691 4.30015 3.06196 5.68522 3.99973C6.26337 3.83906 6.8838 3.75895 7.50022 3.75583C8.1162 3.75895 8.73619 3.83906 9.31523 3.99973C10.6994 3.06196 11.3069 3.25691 11.3069 3.25691C11.7026 4.25521 11.4538 4.99226 11.3795 5.17563C11.8441 5.68257 12.1245 6.32925 12.1245 7.12104C12.1245 9.9063 10.4292 10.5192 8.81452 10.6985C9.07444 10.9224 9.30633 11.3648 9.30633 12.0413C9.30633 13.0102 9.29742 13.7922 9.29742 14.0299C9.29742 14.2239 9.42828 14.4496 9.79591 14.3788C12.6746 13.4179 14.75 10.7025 14.75 7.50024C14.75 3.49593 11.5036 0.25 7.49933 0.25Z"
+          />
+        </svg>
+
+        <span>SOURCE CODE</span>
+
+    </a>
+
+    <!-- APK DOWNLOAD -->
+
+    <a href="#"
+       target="_blank"
+       class="cyber-action-btn">
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 16L7 11H10V4H14V11H17L12 16ZM5 18H19V20H5V18Z"
+          />
+        </svg>
+
+        <span>DOWNLOAD APK</span>
+
+    </a>
+
+</div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Project Node 3 -->
+<div class="cyber-flip-card">
+    
+    <div class="cyber-flip-inner">
+
+        <!-- FRONT -->
+        <div class="cyber-front">
+
+            <img src="Focus-Todoapp.png" alt="Cyber Safety Detection" />
+
+            <div class="cyber-front-overlay"></div>
+
+            <div class="cyber-front-content">
+                <div class="cyber-project-title">
+                    Focus-Todoapp
+                </div>
+
+                <div class="cyber-project-sub">
+                    Hover for more information
+                </div>
+            </div>
+        </div>
+
+        <!-- BACK -->
+        <div class="cyber-back">
+
+            <div class="cyber-back-content">
+
+                <h3>Focus-Todoapp</h3>
+
+                <p>
+                    Focus is a clean and intuitive productivity app that helps you organize tasks,
+                     track habits, journal your thoughts, and build consistency every day.
+                </p>
+
+                <div class="cyber-skill-tags">
+                    <span>ANDROID</span>
+                    <span>KOTLIN</span>
+                    <span>ROOMDB</span>
+                    <span>JETPACK</span>
+                </div>
+                <!-- ACTION BUTTONS -->
+<!-- PROJECT ACTION BUTTONS -->
+
+<div class="project-action-buttons">
+
+    <!-- SOURCE CODE -->
+
+    <a href="https://github.com/iamloki143/smart-life-productivity-app"
+       target="_blank"
+       class="cyber-action-btn">
+
+        <svg
+          viewBox="0 0 15 15"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7.49933 0.25C3.49635 0.25 0.25 3.49593 0.25 7.50024C0.25 10.703 2.32715 13.4206 5.2081 14.3797C5.57084 14.446 5.70302 14.2222 5.70302 14.0299C5.70302 13.8576 5.69679 13.4019 5.69323 12.797C3.67661 13.235 3.25112 11.825 3.25112 11.825C2.92132 10.9874 2.44599 10.7644 2.44599 10.7644C1.78773 10.3149 2.49584 10.3238 2.49584 10.3238C3.22353 10.375 3.60629 11.0711 3.60629 11.0711C4.25298 12.1788 5.30335 11.8588 5.71638 11.6732C5.78225 11.205 5.96962 10.8854 6.17658 10.7043C4.56675 10.5209 2.87415 9.89918 2.87415 7.12104C2.87415 6.32925 3.15677 5.68257 3.62053 5.17563C3.54576 4.99226 3.29697 4.25521 3.69174 3.25691C3.69174 3.25691 4.30015 3.06196 5.68522 3.99973C6.26337 3.83906 6.8838 3.75895 7.50022 3.75583C8.1162 3.75895 8.73619 3.83906 9.31523 3.99973C10.6994 3.06196 11.3069 3.25691 11.3069 3.25691C11.7026 4.25521 11.4538 4.99226 11.3795 5.17563C11.8441 5.68257 12.1245 6.32925 12.1245 7.12104C12.1245 9.9063 10.4292 10.5192 8.81452 10.6985C9.07444 10.9224 9.30633 11.3648 9.30633 12.0413C9.30633 13.0102 9.29742 13.7922 9.29742 14.0299C9.29742 14.2239 9.42828 14.4496 9.79591 14.3788C12.6746 13.4179 14.75 10.7025 14.75 7.50024C14.75 3.49593 11.5036 0.25 7.49933 0.25Z"
+          />
+        </svg>
+
+        <span>SOURCE CODE</span>
+
+    </a>
+
+    <!-- APK DOWNLOAD -->
+
+    <a href="#"
+       target="_blank"
+       class="cyber-action-btn">
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 16L7 11H10V4H14V11H17L12 16ZM5 18H19V20H5V18Z"
+          />
+        </svg>
+
+        <span>DOWNLOAD APK</span>
+
+    </a>
+
+</div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Project Node 4 -->
+<div class="cyber-flip-card">
+    
+    <div class="cyber-flip-inner">
+
+        <!-- FRONT -->
+        <div class="cyber-front">
+
+            <img src="YOUR_IMAGE_URL" alt="Cyber Safety Detection" />
+
+            <div class="cyber-front-overlay"></div>
+
+            <div class="cyber-front-content">
+                <div class="cyber-project-title">
+                    Cyber Safety Detection
+                </div>
+
+                <div class="cyber-project-sub">
+                    SERIAL_001 // 2024
+                </div>
+            </div>
+        </div>
+
+        <!-- BACK -->
+        <div class="cyber-back">
+
+            <div class="cyber-back-content">
+
+                <h3>Cyber Safety Detection</h3>
+
+                <p>
+                    Automated threat intelligence system for Android environments
+                    with real-time anomaly detection, advanced monitoring,
+                    and AI-powered security analysis.
+                </p>
+
+                <div class="cyber-skill-tags">
+                    <span>ANDROID</span>
+                    <span>KOTLIN</span>
+                    <span>ML</span>
+                    <span>FIREBASE</span>
+                </div>
+                <!-- PROJECT ACTION BUTTONS -->
+
+<div class="project-action-buttons">
+
+    <!-- SOURCE CODE -->
+
+    <a href="https://github.com/iamloki143/smart-life-productivity-app"
+       target="_blank"
+       class="cyber-action-btn">
+
+        <svg
+          viewBox="0 0 15 15"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7.49933 0.25C3.49635 0.25 0.25 3.49593 0.25 7.50024C0.25 10.703 2.32715 13.4206 5.2081 14.3797C5.57084 14.446 5.70302 14.2222 5.70302 14.0299C5.70302 13.8576 5.69679 13.4019 5.69323 12.797C3.67661 13.235 3.25112 11.825 3.25112 11.825C2.92132 10.9874 2.44599 10.7644 2.44599 10.7644C1.78773 10.3149 2.49584 10.3238 2.49584 10.3238C3.22353 10.375 3.60629 11.0711 3.60629 11.0711C4.25298 12.1788 5.30335 11.8588 5.71638 11.6732C5.78225 11.205 5.96962 10.8854 6.17658 10.7043C4.56675 10.5209 2.87415 9.89918 2.87415 7.12104C2.87415 6.32925 3.15677 5.68257 3.62053 5.17563C3.54576 4.99226 3.29697 4.25521 3.69174 3.25691C3.69174 3.25691 4.30015 3.06196 5.68522 3.99973C6.26337 3.83906 6.8838 3.75895 7.50022 3.75583C8.1162 3.75895 8.73619 3.83906 9.31523 3.99973C10.6994 3.06196 11.3069 3.25691 11.3069 3.25691C11.7026 4.25521 11.4538 4.99226 11.3795 5.17563C11.8441 5.68257 12.1245 6.32925 12.1245 7.12104C12.1245 9.9063 10.4292 10.5192 8.81452 10.6985C9.07444 10.9224 9.30633 11.3648 9.30633 12.0413C9.30633 13.0102 9.29742 13.7922 9.29742 14.0299C9.29742 14.2239 9.42828 14.4496 9.79591 14.3788C12.6746 13.4179 14.75 10.7025 14.75 7.50024C14.75 3.49593 11.5036 0.25 7.49933 0.25Z"
+          />
+        </svg>
+
+        <span>SOURCE CODE</span>
+
+    </a>
+
+    <!-- APK DOWNLOAD -->
+
+    <a href="#"
+       target="_blank"
+       class="cyber-action-btn">
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 16L7 11H10V4H14V11H17L12 16ZM5 18H19V20H5V18Z"
+          />
+        </svg>
+
+        <span>DOWNLOAD APK</span>
+
+    </a>
+
+</div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Project Node 5 -->
+<div class="cyber-flip-card">
+    
+    <div class="cyber-flip-inner">
+
+        <!-- FRONT -->
+        <div class="cyber-front">
+
+            <img src="YOUR_IMAGE_URL" alt="Cyber Safety Detection" />
+
+            <div class="cyber-front-overlay"></div>
+
+            <div class="cyber-front-content">
+                <div class="cyber-project-title">
+                    Cyber Safety Detection
+                </div>
+
+                <div class="cyber-project-sub">
+                    SERIAL_001 // 2024
+                </div>
+            </div>
+        </div>
+
+        <!-- BACK -->
+        <div class="cyber-back">
+
+            <div class="cyber-back-content">
+
+                <h3>Cyber Safety Detection</h3>
+
+                <p>
+                    Automated threat intelligence system for Android environments
+                    with real-time anomaly detection, advanced monitoring,
+                    and AI-powered security analysis.
+                </p>
+
+                <div class="cyber-skill-tags">
+                    <span>ANDROID</span>
+                    <span>KOTLIN</span>
+                    <span>ML</span>
+                    <span>FIREBASE</span>
+                </div>
+                <!-- PROJECT ACTION BUTTONS -->
+
+<div class="project-action-buttons">
+
+    <!-- SOURCE CODE -->
+
+    <a href="https://github.com/iamloki143/smart-life-productivity-app"
+       target="_blank"
+       class="cyber-action-btn">
+
+        <svg
+          viewBox="0 0 15 15"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7.49933 0.25C3.49635 0.25 0.25 3.49593 0.25 7.50024C0.25 10.703 2.32715 13.4206 5.2081 14.3797C5.57084 14.446 5.70302 14.2222 5.70302 14.0299C5.70302 13.8576 5.69679 13.4019 5.69323 12.797C3.67661 13.235 3.25112 11.825 3.25112 11.825C2.92132 10.9874 2.44599 10.7644 2.44599 10.7644C1.78773 10.3149 2.49584 10.3238 2.49584 10.3238C3.22353 10.375 3.60629 11.0711 3.60629 11.0711C4.25298 12.1788 5.30335 11.8588 5.71638 11.6732C5.78225 11.205 5.96962 10.8854 6.17658 10.7043C4.56675 10.5209 2.87415 9.89918 2.87415 7.12104C2.87415 6.32925 3.15677 5.68257 3.62053 5.17563C3.54576 4.99226 3.29697 4.25521 3.69174 3.25691C3.69174 3.25691 4.30015 3.06196 5.68522 3.99973C6.26337 3.83906 6.8838 3.75895 7.50022 3.75583C8.1162 3.75895 8.73619 3.83906 9.31523 3.99973C10.6994 3.06196 11.3069 3.25691 11.3069 3.25691C11.7026 4.25521 11.4538 4.99226 11.3795 5.17563C11.8441 5.68257 12.1245 6.32925 12.1245 7.12104C12.1245 9.9063 10.4292 10.5192 8.81452 10.6985C9.07444 10.9224 9.30633 11.3648 9.30633 12.0413C9.30633 13.0102 9.29742 13.7922 9.29742 14.0299C9.29742 14.2239 9.42828 14.4496 9.79591 14.3788C12.6746 13.4179 14.75 10.7025 14.75 7.50024C14.75 3.49593 11.5036 0.25 7.49933 0.25Z"
+          />
+        </svg>
+
+        <span>SOURCE CODE</span>
+
+    </a>
+
+    <!-- APK DOWNLOAD -->
+
+    <a href="#"
+       target="_blank"
+       class="cyber-action-btn">
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 16L7 11H10V4H14V11H17L12 16ZM5 18H19V20H5V18Z"
+          />
+        </svg>
+
+        <span>DOWNLOAD APK</span>
+
+    </a>
+
+</div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+</section>
+<!-- Skills Section: TECH_STACK -->
+<section class="space-y-gutter" id="skills">
+<div class="flex items-center gap-4">
+<h2 class="text-headline-lg font-headline-lg text-primary uppercase">TECH_STACK</h2>
+<div class="h-[2px] flex-grow bg-outline-variant"></div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 py-8 place-items-center">
+<!-- Skill Badges -->
+<!-- Kotlin -->
+<div class="button-borders skill-wrapper">
+
+  <button class="primary-button skill-card">
+
+    <i class="devicon-kotlin-plain skill-icon"></i>
+
+    <span class="skill-text">
+      KOTLIN
+    </span>
+
+  </button>
+
+</div>
+
+<!-- Jetpack -->
+<div class="button-borders skill-wrapper">
+
+  <button class="primary-button skill-card">
+
+    <span class="material-symbols-outlined skill-icon">
+      android
+    </span>
+
+    <span class="skill-text">
+      JETPACK
+    </span>
+
+  </button>
+
+</div>
+
+<!-- Firebase -->
+<div class="button-borders skill-wrapper">
+
+  <button class="primary-button skill-card">
+
+    <i class="devicon-firebase-plain skill-icon"></i>
+
+    <span class="skill-text">
+      FIREBASE
+    </span>
+
+  </button>
+
+</div>
+
+<!-- MongoDB -->
+<div class="button-borders skill-wrapper">
+
+  <button class="primary-button skill-card">
+
+    <i class="devicon-mongodb-plain skill-icon"></i>
+
+    <span class="skill-text">
+      MONGODB
+    </span>
+
+  </button>
+
+</div>
+
+<!-- Python -->
+<div class="button-borders skill-wrapper">
+
+  <button class="primary-button skill-card">
+
+    <i class="devicon-python-plain skill-icon"></i>
+
+    <span class="skill-text">
+      PYTHON
+    </span>
+
+  </button>
+
+</div>
+
+<!-- Git -->
+<div class="button-borders skill-wrapper">
+
+  <button class="primary-button skill-card">
+
+    <i class="devicon-git-plain skill-icon"></i>
+
+    <span class="skill-text">
+      GIT
+    </span>
+
+  </button>
+
+</div>
+
+<!-- ASP.NET -->
+<div class="button-borders skill-wrapper">
+
+  <button class="primary-button skill-card">
+
+    <i class="devicon-dot-net-plain skill-icon"></i>
+
+    <span class="skill-text">
+      ASP.NET
+    </span>
+
+  </button>
+
+</div>
+</section>
+<!-- Experience & Education: INTEL_DATA -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-margin" id="experience">
+<div class="space-y-gutter">
+<div class="flex items-center gap-4">
+<h2 class="text-headline-lg font-headline-lg text-primary uppercase">EXPERIENCE</h2>
+</div>
+<div class="relative pl-8 border-l-2 border-outline-variant space-y-12">
+<div class="relative">
+<div class="absolute -left-[35px] top-0 w-4 h-4 bg-primary border-4 border-surface shadow-[0_0_10px_#ffb3b2]"></div>
+<div class="space-y-1">
+<span class="text-label-sm font-label-md text-primary uppercase">Current // Internship</span>
+<h3 class="text-headline-md font-headline-md">SaneForce - Android Developer</h3>
+<p class="text-on-surface-variant italic">Architecting scalable mobile solutions and UI components.</p>
+<p class="text-body-md text-on-surface/80 pt-2">
+                            Developed core mobile architectural components for enterprise field force management. Optimized UI responsiveness using Jetpack Compose and managed state with modern reactive patterns.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-gutter">
+<div class="flex items-center gap-4">
+<h2 class="text-headline-lg font-headline-lg text-primary uppercase">EDUCATION</h2>
+</div>
+<div class="relative pl-8 border-l-2 border-outline-variant space-y-12">
+<div class="relative">
+<div class="absolute -left-[35px] top-0 w-4 h-4 bg-primary/60 border-4 border-surface shadow-[0_0_10px_#ffb3b2]"></div>
+<div class="space-y-1">
+<span class="text-label-sm font-label-md text-primary uppercase">2022 — 2026</span>
+<h3 class="text-headline-md font-headline-md">B.E. Computer Science</h3>
+<p class="text-on-surface-variant italic">Anand Institute of Higher Technology</p>
+<p class="text-body-md text-on-surface/80 pt-2">
+                            Specializing in mobile systems, algorithm design, and neural processing. Maintaining technical excellence across core CS fundamentals.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact HUD Section -->
+<section class="space-y-gutter contact-section relative overflow-hidden" id="contact">
+<div class="flex items-center gap-4">
+<h2 class="text-headline-lg font-headline-lg text-primary uppercase">CONTACT_HUD</h2>
+<div class="h-[2px] flex-grow bg-outline-variant"></div>
+</div>
+<div class="contact-layout">
+
+    <!-- LEFT CONTENT -->
+
+    <div class="contact-left-content">
+
+        <h3 class="contact-main-title">
+            LET'S GET<br>
+            IN TOUCH
+        </h3>
+
+        <p class="contact-subtext">
+            Building futuristic Android experiences, secure mobile systems,
+            and cyberpunk-inspired digital products.
+            Open for collaborations, internships,
+            freelance projects, and innovative ideas.
+        </p>
+
+        <div class="contact-mini-status">
+            STATUS : AVAILABLE FOR WORK
+        </div>
+
+    </div>
+
+    <!-- RIGHT CONTACT INFO -->
+
+    <div class="contact-info-side">
+
+        <!-- GITHUB -->
+
+        <a
+          href="https://github.com/iamloki143"
+          target="_blank"
+          class="contact-card"
+        >
+
+            <div class="flex items-center gap-5">
+
+                <i class="devicon-github-original contact-real-icon"></i>
+
+                <div>
+                    <div class="text-label-sm text-primary uppercase">
+                        GITHUB
+                    </div>
+
+                    <div class="text-headline-md font-headline-md">
+                        iamloki143
+                    </div>
+                </div>
+
+            </div>
+
+        </a>
+
+        <!-- LINKEDIN -->
+
+        <a
+          href="https://www.linkedin.com/in/lokesh-kumar-43ba04333/"
+          target="_blank"
+          class="contact-card"
+        >
+
+            <div class="flex items-center gap-5">
+
+                <i class="devicon-linkedin-plain contact-real-icon"></i>
+
+                <div>
+                    <div class="text-label-sm text-primary uppercase">
+                        LINKEDIN
+                    </div>
+
+                    <div class="text-headline-md font-headline-md">
+                        lokesh-kumar
+                    </div>
+                </div>
+
+            </div>
+
+        </a>
+
+        <!-- EMAIL -->
+
+        <a
+          href="mailto:lokesh.s14032005@gmail.com"
+          class="contact-card"
+        >
+
+            <div class="flex items-center gap-5">
+
+                <span class="material-symbols-outlined contact-real-icon">
+                    mail
+                </span>
+
+                <div>
+                    <div class="text-label-sm text-primary uppercase">
+                        EMAIL
+                    </div>
+
+                    <div class="text-headline-md font-headline-md break-all">
+                        lokesh.s14032005@gmail.com
+                    </div>
+                </div>
+
+            </div>
+
+        </a>
+
+        <!-- LOCATION -->
+
+        <div class="contact-card">
+
+            <div class="flex items-center gap-5">
+
+                <span class="material-symbols-outlined contact-real-icon">
+                    location_on
+                </span>
+
+                <div>
+                    <div class="text-label-sm text-primary uppercase">
+                        LOCATION
+                    </div>
+
+                    <div class="text-headline-md font-headline-md">
+                        CHENNAI // TN
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- PHONE -->
+
+        <div class="contact-card">
+
+            <div class="flex items-center gap-5">
+
+                <span class="material-symbols-outlined contact-real-icon">
+                    call
+                </span>
+
+                <div>
+                    <div class="text-label-sm text-primary uppercase">
+                        COMM_LINE
+                    </div>
+
+                    <div class="text-headline-md font-headline-md">
+                        +91 86672 81742
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-margin px-margin grid grid-cols-1 md:grid-cols-2 gap-gutter items-center border-t border-outline-variant bg-surface-container-low mt-24">
+<div class="text-label-md font-label-md text-primary">
+         LOKESH KUMAR 
+    </div>
+<div class="flex justify-start md:justify-end gap-gutter">
+<a class="text-on-tertiary-fixed-variant text-label-sm font-label-sm hover:text-primary hover:underline transition-all terminal-cursor" href="https://github.com/iamloki143">GitHub</a>
+<a class="text-on-tertiary-fixed-variant text-label-sm font-label-sm hover:text-primary hover:underline transition-all terminal-cursor" href="https://www.linkedin.com/in/lokesh-kumar-43ba04333/">LinkedIn</a>
+<a class="text-on-tertiary-fixed-variant text-label-sm font-label-sm hover:text-primary hover:underline transition-all terminal-cursor" href="#">Resume</a>
+</div>
+</footer>
+<script>
+    // Typing Effect Configuration
+    const textElement = document.getElementById('typing-text');
+    const text = "ANDROID DEVELOPER";
+    let charIndex = 0;
+    let isTyping = true;
+
+    function typeEffect() {
+        if (isTyping) {
+            if (charIndex < text.length) {
+                textElement.innerText = text.substring(0, charIndex + 1);
+                charIndex++;
+                setTimeout(typeEffect, 100);
+            } else {
+                isTyping = false;
+                setTimeout(typeEffect, 3000); // Pause at end
+            }
+        } else {
+            if (charIndex > 0) {
+                textElement.innerText = text.substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(typeEffect, 50);
+            } else {
+                isTyping = true;
+                setTimeout(typeEffect, 500); // Pause at start
+            }
+        }
+    }
+    
+    // Start Typing
+    window.addEventListener('DOMContentLoaded', () => {
+        setTimeout(typeEffect, 1000);
+    });
+
+    // Character State Management
+    const states = ['state-drawing', 'state-coding', 'state-football'];
+    let currentStateIndex = 0;
+    const container = document.getElementById('character-container');
+
+    container.addEventListener('click', () => {
+        // Hide current
+        document.getElementById(states[currentStateIndex]).classList.add('character-hidden');
+        
+        // Increment
+        currentStateIndex = (currentStateIndex + 1) % states.length;
+        
+        // Show new
+        document.getElementById(states[currentStateIndex]).classList.remove('character-hidden');
+        
+        // Visual feedback on status bar
+        const scanStatus = document.getElementById('scan-status');
+        scanStatus.innerText = `SYNCING_MODULE: ${currentStateIndex + 1}/3`;
+        setTimeout(() => {
+            scanStatus.innerText = 'SCANNING_PROTOCOL: 100%';
+        }, 800);
+    });
+
+    // Micro-interactions and Glitch effects
+    document.querySelectorAll('.glitch-hover').forEach(button => {
+        button.addEventListener('mouseover', () => {
+            if (Math.random() > 0.8) {
+                button.style.transform = `translateX(${Math.random() * 5}px)`;
+                setTimeout(() => button.style.transform = 'translateX(0)', 50);
+            }
+        });
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+</body></html>
