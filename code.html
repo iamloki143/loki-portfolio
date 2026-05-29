@@ -1177,10 +1177,113 @@
         transform: translateY(0);
     }
 }
+/* ========================= */
+/* CYBER LOADER */
+/* ========================= */
+
+#loader {
+    position: fixed;
+    inset: 0;
+
+    background: #050505;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 99999;
+
+    transition: opacity 0.8s ease,
+                visibility 0.8s ease;
+}
+
+#loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    text-align: center;
+    width: 320px;
+}
+
+.loader-title {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #ff4655;
+    letter-spacing: 4px;
+
+    margin-bottom: 30px;
+
+    text-shadow:
+        0 0 10px rgba(255,70,85,0.6),
+        0 0 20px rgba(255,70,85,0.4);
+}
+
+.loader-bar {
+    width: 100%;
+    height: 6px;
+
+    background: #222;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+}
+
+.loader-progress {
+    height: 100%;
+    width: 0%;
+
+    background: linear-gradient(
+        90deg,
+        #ff003c,
+        #ff4655,
+        #ffb3b2
+    );
+
+    animation: loadingBar 2.5s ease forwards;
+}
+
+.loader-text {
+    margin-top: 18px;
+
+    color: #ffb3b2;
+
+    letter-spacing: 3px;
+
+    font-size: 0.8rem;
+
+    animation: terminal-blink 1s infinite;
+}
+
+@keyframes loadingBar {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
+}
     </style>
 </head>
 <body class="font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container">
-<!-- TopNavBar Shell -->
+<!-- LOADING SCREEN -->
+<div id="loader">
+    <div class="loader-content">
+        <h1 class="loader-title">LOKESH KUMAR</h1>
+
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+
+        <p class="loader-text">
+            INITIALIZING SYSTEM...
+        </p>
+    </div>
+</div>
+
+    <!-- TopNavBar Shell -->
 <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin py-unit bg-surface/80 backdrop-blur-md border-b border-outline-variant">
 <div class="text-label-md font-label-md font-bold tracking-tighter text-primary">
         LOKESH KUMAR // ANDROID ARCHITECT
@@ -1810,10 +1913,10 @@
 </div>
 </div>
 </section>
-<!-- Contact HUD Section -->
+<!-- Contact Info Section -->
 <section class="space-y-gutter contact-section relative overflow-hidden" id="contact">
 <div class="flex items-center gap-4">
-<h2 class="text-headline-lg font-headline-lg text-primary uppercase">CONTACT_HUD</h2>
+<h2 class="text-headline-lg font-headline-lg text-primary uppercase">CONTACT_INFO</h2>
 <div class="h-[2px] flex-grow bg-outline-variant"></div>
 </div>
 <div class="contact-layout">
@@ -2008,6 +2111,22 @@
         });
     });
     
+</script>
+<script>
+
+window.addEventListener("load", () => {
+
+    setTimeout(() => {
+
+        document
+            .getElementById("loader")
+            .classList
+            .add("hidden");
+
+    }, 2500);
+
+});
+
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
     <script>
